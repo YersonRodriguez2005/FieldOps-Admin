@@ -256,9 +256,7 @@ const Equipos = () => {
       <header className="sticky top-0 z-20 w-full bg-gray-800/90 backdrop-blur-md border-b border-gray-700/60 px-6 py-3.5 flex justify-between items-center shadow-lg shadow-black/30">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-linear-to-br from-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-indigo-950/50">
-            <svg viewBox="0 0 20 20" fill="white" className="w-4 h-4">
-              <path fillRule="evenodd" d="M9.664 1.319a.75.75 0 01.672 0 41.059 41.059 0 018.198 5.424.75.75 0 01-.254 1.285 31.372 31.372 0 00-7.86 3.83.75.75 0 01-.84 0 31.508 31.508 0 00-2.08-1.287V9.394c0-.244.116-.463.315-.6a35.504 35.504 0 013.408-2.116.75.75 0 01.686 1.33 38.84 38.84 0 00-2.467 1.532A32.902 32.902 0 019.748 13.2a32.904 32.904 0 01-7.748-5.142.75.75 0 01-.253-1.285 41.059 41.059 0 018.198-5.424z" clipRule="evenodd" />
-            </svg>
+            <img className='w-full h-full object-cover' src="/Logo.jpg" alt="Logo FieldOps" />
           </div>
           <h2 className="fo-brand-shimmer text-2xl font-extrabold tracking-tight">FieldOps</h2>
         </div>

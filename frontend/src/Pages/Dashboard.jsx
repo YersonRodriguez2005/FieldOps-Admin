@@ -211,9 +211,7 @@ const DashboardMetricas = () => {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-linear-to-br from-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-indigo-950/50">
-            <svg viewBox="0 0 20 20" fill="white" className="w-4 h-4">
-              <path fillRule="evenodd" d="M9.664 1.319a.75.75 0 01.672 0 41.059 41.059 0 018.198 5.424.75.75 0 01-.254 1.285 31.372 31.372 0 00-7.86 3.83.75.75 0 01-.84 0 31.508 31.508 0 00-2.08-1.287V9.394c0-.244.116-.463.315-.6a35.504 35.504 0 013.408-2.116.75.75 0 01.686 1.33 38.84 38.84 0 00-2.467 1.532A32.902 32.902 0 019.748 13.2a32.904 32.904 0 01-7.748-5.142.75.75 0 01-.253-1.285 41.059 41.059 0 018.198-5.424zM5.71 8.4a33.43 33.43 0 00-1.755 1.493.75.75 0 00.016 1.1 32.908 32.908 0 005.78 4.049.75.75 0 00.84 0 32.908 32.908 0 005.78-4.048.75.75 0 00.016-1.1 33.543 33.543 0 00-2.993-2.304 1.5 1.5 0 01-.564 1.604l-.042.03a.75.75 0 01-.84 0 30.01 30.01 0 00-2.17-1.318.75.75 0 01-.32-.994 1.498 1.498 0 01-.188-.146l-.043-.03A1.5 1.5 0 015.71 8.4z" clipRule="evenodd"/>
-            </svg>
+            <img className='w-full h-full object-cover' src="/Logo.jpg" alt="Logo FieldOps" />
           </div>
           <h2 className="fo-brand text-2xl font-extrabold tracking-tight">FieldOps</h2>
         </div>

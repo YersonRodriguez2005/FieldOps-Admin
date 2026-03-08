@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/Auth';
-import { useFieldOpsToast } from '../components/FieldopsToast';
+import { useFieldOpsToast } from '../components/FieldOpsToast';
 
 // ─── CSS de animaciones ───────────────────────────────────────────────────────
 const LOGIN_CSS = `
@@ -102,9 +102,7 @@ const Login = () => {
           {/* Logo + título */}
           <div className="text-center space-y-3">
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-sky-500 to-indigo-600 shadow-lg shadow-indigo-950/50 mb-1">
-              <svg viewBox="0 0 20 20" fill="white" className="w-7 h-7">
-                <path fillRule="evenodd" d="M9.664 1.319a.75.75 0 01.672 0 41.059 41.059 0 018.198 5.424.75.75 0 01-.254 1.285 31.372 31.372 0 00-7.86 3.83.75.75 0 01-.84 0 31.508 31.508 0 00-2.08-1.287V9.394c0-.244.116-.463.315-.6a35.504 35.504 0 013.408-2.116.75.75 0 01.686 1.33 38.84 38.84 0 00-2.467 1.532A32.902 32.902 0 019.748 13.2a32.904 32.904 0 01-7.748-5.142.75.75 0 01-.253-1.285 41.059 41.059 0 018.198-5.424z" clipRule="evenodd" />
-              </svg>
+              <img className='w-full h-full object-cover' src="/Logo.jpg" alt="Logo FieldOps" />
             </div>
             <h2 className="fo-brand-shimmer text-3xl font-extrabold tracking-tight">
               FieldOps
