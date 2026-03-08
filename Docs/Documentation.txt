@@ -1,0 +1,27 @@
+Time 1: Cree la documentacion de requerimientos analizando los requisitos 
+funcionales y no funcionales del sistema y identificando la historia de 
+usuario la cual es requerida para el proyecto.
+
+Time 2: Cree la documentacion respectiva del diseño del poryecto la cual 
+consto de idetificacion de paleta de colores, tecnologias a utilizar, 
+diccionario de datos para la base de datos y el diseño en el wireframe de 
+Excalidraw donde construimos el boceto inicial del poryecto como pagina web.
+
+Time 3: Cree el ultimo diagrama de la etapa de diseño la cual se estructura de 
+igual forma con el diccionario e datos el diagrama es el de modelo entidad relacion, 
+seguidamente se paso a la creacion de la base de datos segun la etapa de diseño y 
+segun los requerimientos del sistema en la planeacion.
+
+Time 4: Cree la estructura, instalacion de dependencias y configure las carpetas 
+del backend donde esta el codigo del server.js, conexion a base de datos con db.js, 
+creacion de controlador de inicio de sesion probandolo a traves de un registros 
+dentro de la base de datos y realizando la peticion de inicio de sesion en Postman. 
+Creacion de ruta de inicio de sesion y validando la ruta en server.js. 
+Creacion de CRUD de usuarios con validacion segun ocupacion, es decir, si es Administrador 
+realiza la mayor parte del CRUD a comparacion con el usuario con ocupacion de tecnico. 
+Validado todo en Postman con pruebas de endpoints.
+
+Time 5: Cree los CRUDs de los controladores de equipos y ordenes de trabajo las cuales 
+tienen validacion por parte del middleware la cual valida la ocupacion de administrador o 
+tecnico para dar permiso de realizar ciertas peticiones del CRUD. Comence a instalar y configurar 
+la parte visual del proyecto y se creo el componente de Login.
