@@ -9,8 +9,7 @@ import Perfil from './Pages/Perfil';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
-// ─── Sistema de notificaciones personalizado FieldOps ───────────────────────
-// Reemplaza react-toastify con un sistema propio que sigue la paleta de la app
+// ─── Sistema de notificaciones personalizado FieldOps
 import { FieldOpsToastProvider } from './components/FieldOpsToast';
 
 export default function App() {
