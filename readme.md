@@ -1,736 +1,567 @@
-# ⚡ FieldOps Admin — Sistema de Gestión de Operaciones de Campo
+# ⚡ FieldOps Admin
 
 <div align="center">
 
-![FieldOps Banner](https://img.shields.io/badge/FieldOps-v1.0.0-38bdf8?style=for-the-badge&logo=lightning&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-20+-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![License](https://img.shields.io/badge/Licencia-MIT-10b981?style=for-the-badge)
+![FieldOps Dashboard](./docs/images/banner.png)
 
-**Panel de administración B2B para empresas de servicios técnicos y mantenimiento en campo.**
+<br/>
 
-[🚀 Demo](#) · [📖 Documentación](#arquitectura) · [🐛 Reportar Bug](#) · [💡 Sugerir Feature](#)
+![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js_20-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL_16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite_5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![Express](https://img.shields.io/badge/Express_4-000000?style=for-the-badge&logo=express&logoColor=white)
+
+<br/>
+
+> **Panel de administración full-stack** para digitalizar la gestión de órdenes de trabajo,  
+> técnicos e inventario en empresas B2B de servicios técnicos en campo.
+
+<br/>
+
+[📸 Demo Visual](#-demo-visual) &nbsp;·&nbsp; [🧠 Retos Técnicos](#-retos-técnicos-superados) &nbsp;·&nbsp; [🚀 Instalación](#-instalación-local) &nbsp;·&nbsp; [📡 API](#-api-reference)
 
 </div>
 
 ---
 
-## 📋 Tabla de Contenidos
+## 🎯 El Problema Real que Resuelve
 
-- [¿Qué problema resuelve?](#-qué-problema-resuelve)
-- [Características principales](#-características-principales)
-- [Arquitectura del sistema](#️-arquitectura-del-sistema)
-- [Stack tecnológico](#-stack-tecnológico)
-- [Requisitos previos](#-requisitos-previos)
-- [Instalación local](#-instalación-local)
-- [Configuración de la base de datos](#️-configuración-de-la-base-de-datos)
-- [Variables de entorno](#-variables-de-entorno)
-- [Estructura del proyecto](#-estructura-del-proyecto)
-- [Módulos del sistema](#-módulos-del-sistema)
-- [Roles y permisos](#-roles-y-permisos)
-- [Diseño y UI](#-diseño-y-ui)
-- [API Reference](#-api-reference)
-- [Contribuir](#-contribuir)
+Las empresas B2B de servicios técnicos (mantenimiento industrial, HVAC, instalaciones eléctricas, telecomunicaciones) siguen operando con **órdenes de trabajo en papel**, **llamadas telefónicas para asignar técnicos** y **hojas de Excel para rastrear herramientas**. Esto genera fricciones operativas concretas y costosas:
 
----
-
-## 🎯 ¿Qué problema resuelve?
-
-Las empresas B2B de servicios técnicos (mantenimiento industrial, telecomunicaciones, instalaciones eléctricas, HVAC, etc.) enfrentan tres problemas críticos en sus operaciones diarias:
-
-| ❌ Problema | ✅ Cómo FieldOps lo resuelve |
+| ❌ Problema operativo | 💥 Impacto en el negocio |
 |---|---|
-| Órdenes de trabajo dispersas en papel o Excel | Panel centralizado con trazabilidad completa de cada orden |
-| Sin visibilidad de qué técnico está disponible | Dashboard en tiempo real con métricas de técnicos activos |
-| Inventario de herramientas descontrolado | Módulo de inventario con estados y fechas de mantenimiento |
-| Asignaciones manuales propensas a errores | Asignación directa de equipos y técnicos por orden de trabajo |
-| Sin control de acceso por rol | Sistema de roles Administrador / Técnico con permisos diferenciados |
+| Órdenes dispersas en papel o WhatsApp | Sin trazabilidad: nadie sabe el estado real de un trabajo |
+| Asignación manual de técnicos | Colisiones: dos técnicos van al mismo lugar, o ninguno va |
+| Inventario sin control de estado | Equipos "perdidos", en mal estado o en uso sin registro |
+| Sin visibilidad para el administrador | Decisiones a ciegas, sin métricas de productividad |
+| Control de acceso inexistente | Cualquiera puede modificar o borrar información crítica |
 
-FieldOps centraliza la gestión de **órdenes de trabajo**, **técnicos**, e **inventario de equipos** en un único panel web, eliminando la fricción operativa y dando visibilidad completa a los administradores.
-
----
-
-## ✨ Características principales
-
-### 📊 Dashboard de métricas
-- Resumen en tiempo real de órdenes totales, completadas y pendientes
-- Conteo de técnicos activos
-- Equipos actualmente en estado de mantenimiento
-
-### 👥 Gestión de usuarios
-- CRUD completo de técnicos y administradores
-- Control de acceso por rol (solo admins crean/editan/eliminan)
-- Autenticación con JWT almacenado de forma segura
-
-### 📦 Inventario de equipos
-- Registro de herramientas y maquinaria con marca, estado y condición
-- Estados semánticos: `Disponible` · `En uso` · `Mantenimiento` · `Dañado`
-- Fecha programada de mantenimiento por equipo
-
-### 📋 Órdenes de trabajo
-- Creación y asignación de órdenes a técnicos
-- Selección múltiple de equipos por orden (solo disponibles)
-- Estados de orden: `Pendiente` · `Activa` · `Completada` · `Cancelada`
-- Fecha programada con formato legible
-
-### 🔔 Sistema de notificaciones
-- Toast notifications 100% personalizadas (sin dependencias externas)
-- Colores semánticos por tipo: éxito, error, advertencia, info
-- Animaciones de entrada/salida con barra de progreso
-
-### 🎨 UI/UX
-- Tema oscuro consistente en toda la aplicación
-- Animaciones de entrada escalonadas en tablas y tarjetas
-- Modales de confirmación para operaciones destructivas
-- Estados de carga con spinners contextuales
-- Tablas vacías con mensajes ilustrativos
+**FieldOps Admin** centraliza todo en un único panel web:  
+un administrador crea una orden, asigna un técnico y reserva los equipos necesarios en menos de un minuto — los equipos quedan bloqueados para otras órdenes automáticamente.
 
 ---
 
-## 🏛️ Arquitectura del sistema
+## 📸 Demo Visual
 
-FieldOps sigue una arquitectura **cliente-servidor desacoplada** (SPA + REST API):
+### 🔐 Login — Autenticación con feedback inmediato
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        CLIENTE (SPA)                        │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │               React 18 + Vite                        │   │
-│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐            │   │
-│  │  │  Pages   │ │Components│ │  API lib │            │   │
-│  │  │Dashboard │ │Formularios│ │ /api/*   │            │   │
-│  │  │Usuarios  │ │Modales   │ │ fetch()  │            │   │
-│  │  │Equipos   │ │Toast     │ │  + JWT   │            │   │
-│  │  │Ordenes   │ │Protected │ └──────────┘            │   │
-│  │  └──────────┘ └──────────┘                         │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                    TailwindCSS + CSS Animations              │
-└────────────────────────────┬────────────────────────────────┘
-                             │ HTTP/REST (JSON)
-                             │ Authorization: Bearer <JWT>
-┌────────────────────────────▼────────────────────────────────┐
-│                     SERVIDOR (REST API)                      │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Node.js + Express                       │   │
-│  │                                                     │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────────────┐  │   │
-│  │  │  Routes  │  │Middlewares│  │   Controllers    │  │   │
-│  │  │/auth     │  │verifyJWT │  │  Lógica negocio  │  │   │
-│  │  │/usuarios │  │roleCheck │  │  Queries SQL     │  │   │
-│  │  │/equipos  │  │errorHndlr│  │                  │  │   │
-│  │  │/ordenes  │  └──────────┘  └──────────────────┘  │   │
-│  │  │/dashboard│                                       │   │
-│  │  └──────────┘                                       │   │
-│  └─────────────────────────────────────────────────────┘   │
-└────────────────────────────┬────────────────────────────────┘
-                             │ pg / node-postgres
-┌────────────────────────────▼────────────────────────────────┐
-│                    BASE DE DATOS                             │
-│              PostgreSQL 16                                   │
-│  ┌───────────┐  ┌───────────┐  ┌─────────────────────┐    │
-│  │ usuarios  │  │  equipos  │  │       ordenes        │    │
-│  │    id     │  │    id     │  │         id           │    │
-│  │  nombre   │  │  nombre   │  │       titulo         │    │
-│  │  correo   │  │   marca   │  │       estado         │    │
-│  │ contrasena│  │  estado   │  │   fecha_programa      │    │
-│  │ ocupacion │  │ condicion │  │    id_usuario (FK)   │    │
-│  └───────────┘  │fecha_mantto│  │ equipos_seleccionados│   │
-│                 └───────────┘  └─────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-```
+<!-- ═══════════════════════════════════════════════════════════════════
+  💡 GIF SUGERIDO — Flujo de login completo:
+     1. Escribe credenciales incorrectas → toast de error en rojo aparece
+     2. Escribe credenciales correctas   → toast "Bienvenido, [nombre]" en verde
+     3. Redirección animada al dashboard
 
-### Flujo de autenticación
+  Cómo grabarlo:
+    · Mac:     Kap (gratis)         → https://getkap.co
+    · Windows: ScreenToGif (gratis) → https://www.screentogif.com
+  
+  Resolución recomendada: 1024×640px, 15fps, loop activado
+  Guardar en: ./docs/gifs/01-login.gif
+  Descomentar la línea de abajo cuando esté listo:
+═══════════════════════════════════════════════════════════════════ -->
+<!-- ![Login Demo](./docs/gifs/01-login.gif) -->
 
 ```
-Usuario           Frontend              Backend              DB
-   │                  │                     │                  │
-   │── login() ──────►│                     │                  │
-   │                  │── POST /auth/login ─►│                  │
-   │                  │                     │── SELECT user ──►│
-   │                  │                     │◄── user data ────│
-   │                  │                     │                  │
-   │                  │◄── { token, nombre, ocupacion }        │
-   │                  │                     │                  │
-   │                  │── localStorage ─────►│                  │
-   │                  │   token, nombre,    │                  │
-   │                  │   ocupacion         │                  │
-   │                  │                     │                  │
-   │  [Rutas protegidas]                    │                  │
-   │                  │── GET /recursos ────►│                  │
-   │                  │   Authorization:    │                  │
-   │                  │   Bearer <JWT>      │── verifyJWT ────►│
+[ Pendiente: GIF del flujo de login con toast de error y toast de bienvenida ]
 ```
 
 ---
 
-## 🛠 Stack tecnológico
+### 📊 Dashboard — Métricas cargadas desde la base de datos
 
-### Frontend
-| Tecnología | Versión | Uso |
-|---|---|---|
-| ⚛️ React | 18 | Framework UI con Hooks |
-| ⚡ Vite | 5 | Bundler y dev server |
-| 🌊 TailwindCSS | 3.4 | Estilos utilitarios |
-| 🔀 React Router DOM | 6 | Enrutamiento SPA |
-| 🎨 CSS Animations | nativo | Transiciones y microinteracciones |
+<!-- ═══════════════════════════════════════════════════════════════════
+  💡 CAPTURA DE PANTALLA — El dashboard con las 4 tarjetas animadas
+  y datos reales. Asegúrate de tener órdenes, técnicos y equipos
+  cargados antes de tomar la captura para que los números no sean 0.
 
-### Backend
-| Tecnología | Versión | Uso |
-|---|---|---|
-| 🟢 Node.js | 20+ | Runtime del servidor |
-| 🚂 Express | 4 | Framework HTTP REST |
-| 🔑 JSON Web Tokens | — | Autenticación stateless |
-| 🐘 node-postgres (pg) | — | Cliente PostgreSQL |
-| 🔒 bcrypt | — | Hash de contraseñas |
-
-### Base de datos
-| Tecnología | Versión | Uso |
-|---|---|---|
-| 🐘 PostgreSQL | 16 | Base de datos relacional principal |
-
----
-
-## 📦 Requisitos previos
-
-Asegúrate de tener instalado lo siguiente antes de comenzar:
+  Resolución recomendada: 1440×900px
+  Guardar en: ./docs/images/02-dashboard.png
+═══════════════════════════════════════════════════════════════════ -->
+<!-- ![Dashboard](./docs/images/02-dashboard.png) -->
 
 ```
-✅ Node.js v20 o superior     →  https://nodejs.org
-✅ npm v9 o superior          →  incluido con Node.js
-✅ PostgreSQL v14 o superior  →  https://www.postgresql.org/download
-✅ Git                        →  https://git-scm.com
-```
-
-Verifica tus versiones:
-
-```bash
-node --version    # v20.x.x
-npm --version     # 9.x.x o superior
-psql --version    # psql (PostgreSQL) 14.x o superior
-git --version     # git version 2.x.x
+[ Pendiente: Captura del dashboard con métricas reales ]
 ```
 
 ---
 
-## 🚀 Instalación local
+### 📋 Crear Orden — Selección múltiple de equipos
 
-### 1. Clonar el repositorio
+<!-- ═══════════════════════════════════════════════════════════════════
+  💡 GIF SUGERIDO — Este es el flujo más representativo del proyecto:
+     1. Click en "Nueva Orden" → modal se abre con animación de rebote
+     2. Escribe el título de la orden
+     3. Selecciona una fecha programada
+     4. Elige un técnico del dropdown
+     5. Marca y desmarca varios equipos con los checkboxes visuales
+        (el contador "X equipos seleccionados" se actualiza en tiempo real)
+     6. Click en "Crear Orden" → spinner → toast de éxito → orden en la tabla
 
-```bash
-git clone https://github.com/tu-usuario/fieldops.git
-cd fieldops
-```
-
-### 2. Instalar dependencias del backend
-
-```bash
-cd backend
-npm install
-```
-
-### 3. Instalar dependencias del frontend
-
-```bash
-cd ../frontend
-npm install
-```
-
-### 4. Configurar variables de entorno
-
-```bash
-# En la carpeta /backend
-cp .env.example .env
-```
-
-Edita el archivo `.env` con tus valores (ver sección [Variables de entorno](#-variables-de-entorno)).
-
-### 5. Inicializar la base de datos
-
-```bash
-# Crea la base de datos en PostgreSQL
-psql -U postgres -c "CREATE DATABASE fieldops_db;"
-
-# Ejecuta el script de inicialización
-psql -U postgres -d fieldops_db -f database/schema.sql
-
-# (Opcional) Cargar datos de prueba
-psql -U postgres -d fieldops_db -f database/seed.sql
-```
-
-### 6. Iniciar los servidores
-
-**Backend** (en una terminal):
-```bash
-cd backend
-npm run dev
-# ✅ Servidor corriendo en http://localhost:3000
-```
-
-**Frontend** (en otra terminal):
-```bash
-cd frontend
-npm run dev
-# ✅ App corriendo en http://localhost:5173
-```
-
-### 7. Acceder a la aplicación
-
-Abre tu navegador en **http://localhost:5173**
-
-Credenciales de prueba (si ejecutaste `seed.sql`):
+  Guardar en: ./docs/gifs/03-crear-orden.gif
+═══════════════════════════════════════════════════════════════════ -->
+<!-- ![Crear Orden](./docs/gifs/03-crear-orden.gif) -->
 
 ```
-👤 Administrador
-   Email:     admin@fieldops.com
-   Contraseña: Admin123!
-
-👷 Técnico
-   Email:     tecnico@fieldops.com
-   Contraseña: Tecnico123!
+[ Pendiente: GIF de creación de orden con selección múltiple de equipos ]
 ```
 
 ---
 
-## 🗄️ Configuración de la base de datos
+### 🔄 Inventario — Estado en tiempo real tras asignar una orden
 
-### Schema completo
+<!-- ═══════════════════════════════════════════════════════════════════
+  💡 GIF SUGERIDO — Muestra el efecto en cadena más valioso del sistema:
+     1. Inventario: un equipo muestra badge "Disponible" (verde)
+     2. Crea una nueva orden asignando ese equipo
+     3. Vuelves al inventario: el mismo equipo ahora muestra "Asignado" (azul)
+  
+  Esto demuestra consistencia de datos entre módulos.
+  Guardar en: ./docs/gifs/04-estado-inventario.gif
+═══════════════════════════════════════════════════════════════════ -->
+<!-- ![Estado Inventario](./docs/gifs/04-estado-inventario.gif) -->
+
+```
+[ Pendiente: GIF mostrando cómo un equipo pasa de "Disponible" a "Asignado" ]
+```
+
+---
+
+### 🔔 Sistema de Notificaciones Personalizado
+
+<!-- ═══════════════════════════════════════════════════════════════════
+  💡 CAPTURA DE PANTALLA — Muestra los 4 tipos de toast al mismo tiempo.
+  Puedes dispararlos temporalmente añadiendo 4 llamadas en un useEffect:
+    toast.success('Guardado', { title: 'Éxito' });
+    toast.error('Error de conexión', { title: 'Error' });
+    toast.warning('Sin permisos', { title: 'Atención' });
+    toast.info('Sesión activa');
+
+  Guardar en: ./docs/images/05-toasts.png
+═══════════════════════════════════════════════════════════════════ -->
+<!-- ![Toast System](./docs/images/05-toasts.png) -->
+
+```
+[ Pendiente: Captura con los 4 tipos de toast (success, error, warning, info) ]
+```
+
+---
+
+## 🧠 Retos Técnicos Superados
+
+Esta sección documenta los problemas de ingeniería más relevantes del proyecto.  
+Es el punto que más valoran los reclutadores técnicos: no solo que funcionó, sino **por qué se tomó cada decisión**.
+
+---
+
+### Reto 1 · Relación N:M entre Órdenes y Equipos
+
+**El problema conceptual**
+
+Una orden puede necesitar múltiples equipos, y un equipo puede haber estado en múltiples órdenes a lo largo del tiempo. Esto es, por definición, una relación **Muchos a Muchos (N:M)**. La solución canónica en SQL es una **tabla intermedia**:
 
 ```sql
--- ============================================
--- FieldOps Database Schema v1.0
--- ============================================
+-- Solución clásica con tabla intermedia
+CREATE TABLE orden_equipo (
+  id_orden   INTEGER REFERENCES ordenes(id),
+  id_equipo  INTEGER REFERENCES equipos(id),
+  PRIMARY KEY (id_orden, id_equipo)
+);
+```
 
--- Tabla de usuarios (técnicos y administradores)
+**La decisión tomada**
+
+Se optó por usar el tipo nativo `INTEGER[]` de PostgreSQL para almacenar los IDs de equipos directamente en la fila de la orden:
+
+```sql
+CREATE TABLE ordenes (
+  id                    SERIAL PRIMARY KEY,
+  titulo                VARCHAR(200),
+  estado                VARCHAR(50),
+  fecha_programa        DATE,
+  id_usuario            INTEGER REFERENCES usuarios(id),
+  equipos_seleccionados INTEGER[] DEFAULT '{}'
+  -- Ejemplo real: {1, 3, 7}
+);
+```
+
+**¿Por qué?**
+
+En el dominio de FieldOps, la asignación de equipos es un dato **perteneciente a la orden en ese instante** — una "foto" de qué herramientas se despacharon. No se necesita consultar "dame todas las órdenes en que participó el equipo #3" desde el inventario. Las consultas van siempre en una dirección: desde la orden hacia los equipos.
+
+Esto simplificó las queries de lectura eliminando JOINs innecesarios y redujo la complejidad del modelo a dos tablas.
+
+**El trade-off honesto**
+
+Si el sistema creciera y necesitara consultas inversas frecuentes (historial por equipo, reportes de uso), una tabla intermedia sería más eficiente. Para el alcance actual, el array de PostgreSQL fue la solución pragmática y correcta.
+
+---
+
+### Reto 2 · Sistema de notificaciones Toast sin dependencias externas
+
+**El problema**
+
+La app necesitaba notificaciones (toasts) accesibles desde cualquier componente: formularios dentro de modales, páginas completas, el propio header. La solución estándar es `react-toastify`, pero eso añade una dependencia externa con estilos que compiten con el tema oscuro personalizado de FieldOps.
+
+**La solución: React Context + patrón Provider**
+
+Se implementó un sistema completo usando solo las APIs nativas de React:
+
+```jsx
+// FieldOpsToast.jsx — arquitectura simplificada
+
+// 1. Contexto global
+const ToastContext = createContext(null);
+
+// 2. Provider en la raíz (App.jsx)
+export function FieldOpsToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
+  const idRef = useRef(0);
+
+  const addToast = useCallback(({ type, title, message, duration }) => {
+    const id = ++idRef.current;
+    setToasts(prev => [...prev, { id, type, title, message, duration }]);
+  }, []);
+
+  // useMemo evita recrear el objeto en cada render de App.jsx
+  // y previene re-renders en cascada de todos los consumidores
+  const toast = useMemo(() => ({
+    success: (msg, opts) => addToast({ type: 'success', message: msg, ...opts }),
+    error:   (msg, opts) => addToast({ type: 'error',   message: msg, ...opts }),
+    warning: (msg, opts) => addToast({ type: 'warning', message: msg, ...opts }),
+    info:    (msg, opts) => addToast({ type: 'info',    message: msg, ...opts }),
+  }), [addToast]);
+
+  return (
+    <ToastContext.Provider value={toast}>
+      {children}
+      {/* Portal fuera del árbol de páginas, siempre visible */}
+      <div className="fixed bottom-6 right-6 z-[9999]">
+        {toasts.map(t => <Toast key={t.id} toast={t} onRemove={removeToast} />)}
+      </div>
+    </ToastContext.Provider>
+  );
+}
+
+// 3. Consumo en cualquier componente — una sola línea
+export const useFieldOpsToast = () => useContext(ToastContext);
+```
+
+**El detalle más interesante: la barra de progreso**
+
+La barra de conteo regresivo de cada toast se implementó con CSS puro — sin `setInterval`, sin lógica de tiempo en JavaScript:
+
+```css
+@keyframes fieldops-progress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+```
+
+```jsx
+// La duración del CSS animation coincide exactamente con el setTimeout del JS
+<span
+  className="absolute bottom-0 left-0 h-0.5 bg-emerald-500"
+  style={{ animation: `fieldops-progress ${duration}ms linear forwards` }}
+/>
+```
+
+El navegador maneja la animación en el hilo de composición (GPU), sin bloquear el hilo principal de JavaScript.
+
+---
+
+### Reto 3 · Evitar la doble asignación de equipos
+
+**El problema**
+
+Si un administrador puede asignar cualquier equipo a cualquier orden, nada impide que el mismo taladro aparezca en dos órdenes activas simultáneamente — reproduciendo exactamente el problema de coordinación que FieldOps busca eliminar.
+
+**La solución en el formulario de creación**
+
+El componente `CrearOrdenes` filtra los equipos disponibles antes de mostrarlos:
+
+```javascript
+const equiposPermitidos = equipos.filter(equipo => {
+  // ✅ Disponible → siempre mostrar
+  if (equipo.estado === 'Disponible') return true;
+
+  // ✅ Al EDITAR: mostrar los ya asignados a esta misma orden
+  //    (el admin puede quitarlos, pero los ve para no perder contexto)
+  if (ordenExistente?.equipos_seleccionados?.includes(equipo.id)) return true;
+
+  // ❌ Asignado a otra orden o en Mantenimiento → ocultar
+  return false;
+});
+```
+
+**El resultado**
+
+La lista de equipos es siempre un reflejo fiel del inventario real en ese instante. El administrador no puede seleccionar algo que ya está comprometido, haciendo la interfaz consistente con el estado de la base de datos.
+
+---
+
+### Reto 4 · Autenticación stateless con JWT en SPA
+
+**El flujo completo**
+
+```
+Frontend                        Backend (Express)
+────────                        ──────────────────
+POST /auth/login ─────────────► bcrypt.compare(password, hash_bd)
+  { correo, contrasena }         jwt.sign({ id, ocupacion }, SECRET)
+                                ◄── { token, nombre, ocupacion }
+
+localStorage.setItem('token')
+
+GET /usuarios ────────────────► middleware verifyToken:
+  Authorization: Bearer <JWT>     const decoded = jwt.verify(token, SECRET)
+                                  req.usuario = decoded
+                                  next()  ←  si válido
+                                  res.401 ←  si expirado o inválido
+                                ◄── [ ...usuarios ]
+```
+
+**Protección de rutas en el frontend**
+
+```jsx
+// ProtectedRoute.jsx
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  
+  // replace=true elimina la ruta del historial del navegador.
+  // Sin esto, el usuario puede volver atrás con "←" después de cerrar sesión
+  // y ver páginas privadas en caché del navegador.
+  if (!token) return <Navigate to="/" replace />;
+  return children;
+};
+```
+
+---
+
+## 🏛️ Arquitectura del Sistema
+
+```
+┌───────────────────────────────────────────────────┐
+│                  CLIENTE (SPA)                    │
+│         React 18 · Vite · TailwindCSS             │
+│                                                   │
+│  Pages/      Components/        api/              │
+│  Dashboard   FieldOpsToast  ─►  Auth.js           │
+│  Usuarios    CrearUsuarios  ─►  Usuarios.js        │
+│  Equipos     CrearEquipos   ─►  Equipos.js         │
+│  Ordenes     CrearOrdenes   ─►  Ordenes.js         │
+│  Perfil      ProtectedRoute                       │
+└─────────────────────┬─────────────────────────────┘
+                      │  HTTP REST · Bearer JWT
+┌─────────────────────▼─────────────────────────────┐
+│               SERVIDOR (REST API)                 │
+│             Node.js 20 · Express 4                │
+│                                                   │
+│  verifyToken → checkRole → controller → query     │
+│                                                   │
+│  /auth/login       bcrypt + jwt.sign()            │
+│  /dashboard        COUNT + agregaciones SQL        │
+│  /usuarios         CRUD + bcrypt en passwords      │
+│  /equipos          CRUD + gestión de estados       │
+│  /ordenes          CRUD + actualizar estado equipo │
+└─────────────────────┬─────────────────────────────┘
+                      │  node-postgres (pool)
+┌─────────────────────▼─────────────────────────────┐
+│                PostgreSQL 16                       │
+│                                                   │
+│  usuarios       equipos         ordenes           │
+│  ──────────     ──────────      ─────────────     │
+│  id (PK)        id (PK)         id (PK)           │
+│  nombre         nombre          titulo            │
+│  correo UNIQUE  marca           estado            │
+│  contrasena     estado          fecha_programa    │
+│  ocupacion      condicion       id_usuario (FK)   │
+│                 fecha_mantto    equipos[] INT[]    │
+└───────────────────────────────────────────────────┘
+```
+
+---
+
+## 🛠 Stack Tecnológico
+
+| Capa | Tecnología | Por qué se eligió |
+|---|---|---|
+| ⚛️ React 18 | Frontend | Hooks + Context para estado global sin Redux |
+| ⚡ Vite 5 | Build tool | HMR instantáneo, build optimizado |
+| 🌊 TailwindCSS 3.4 | Estilos | Utilitarios sin archivos CSS externos |
+| 🔀 React Router 6 | Routing | Rutas protegidas y navegación SPA |
+| 🟢 Node.js 20 | Backend | Runtime async, ideal para APIs REST |
+| 🚂 Express 4 | Framework | Minimalista, fácil de capas |
+| 🔑 JWT | Auth | Stateless, sin sesiones en servidor |
+| 🐘 PostgreSQL 16 | DB | Arrays nativos para la relación N:M |
+| 🔒 bcrypt | Seguridad | Hash de contraseñas con salt automático |
+
+---
+
+## 📦 Requisitos Previos
+
+```bash
+node --version    # v20.x.x o superior
+npm --version     # v9.x.x o superior
+psql --version    # PostgreSQL 14 o superior
+git --version     # 2.x.x
+```
+
+---
+
+## 🚀 Instalación Local
+
+```bash
+# 1. Clonar
+git clone https://github.com/tu-usuario/fieldops.git
+cd fieldops
+
+# 2. Dependencias
+cd backend  && npm install
+cd ../frontend && npm install
+
+# 3. Variables de entorno
+cd ../backend
+cp .env.example .env
+# → Edita .env con tus datos de PostgreSQL y JWT_SECRET
+
+# 4. Base de datos
+psql -U postgres -c "CREATE DATABASE fieldops_db;"
+psql -U postgres -d fieldops_db -f database/schema.sql
+psql -U postgres -d fieldops_db -f database/seed.sql   # datos de prueba
+
+# 5. Levantar
+# Terminal 1:
+cd backend  && npm run dev    # → http://localhost:3000
+# Terminal 2:
+cd frontend && npm run dev    # → http://localhost:5173
+```
+
+**Credenciales de prueba:**
+
+```
+👑 Administrador  →  admin@fieldops.com   /  Admin123!
+👷 Técnico        →  tecnico@fieldops.com /  Tecnico123!
+```
+
+---
+
+## 🗄️ Base de Datos
+
+### Schema
+
+```sql
 CREATE TABLE usuarios (
     id          SERIAL PRIMARY KEY,
     nombre      VARCHAR(100)        NOT NULL,
     correo      VARCHAR(150) UNIQUE NOT NULL,
-    contrasena  VARCHAR(255)        NOT NULL,  -- bcrypt hash
-    ocupacion   VARCHAR(50)         NOT NULL   -- 'Administrador' | 'Técnico'
+    contrasena  VARCHAR(255)        NOT NULL,
+    ocupacion   VARCHAR(50)         NOT NULL
 );
 
--- Tabla de equipos / inventario
 CREATE TABLE equipos (
     id           SERIAL PRIMARY KEY,
     nombre       VARCHAR(100) NOT NULL,
     marca        VARCHAR(100) NOT NULL,
     estado       VARCHAR(50)  NOT NULL DEFAULT 'Disponible',
-    -- 'Disponible' | 'En uso' | 'Mantenimiento' | 'Dañado'
     condicion    VARCHAR(50)  NOT NULL DEFAULT 'Nuevo',
-    -- 'Nuevo' | 'Buena' | 'Regular' | 'Mala' | 'Dañado'
     fecha_mantto DATE
 );
 
--- Tabla de órdenes de trabajo
 CREATE TABLE ordenes (
     id                    SERIAL PRIMARY KEY,
     titulo                VARCHAR(200) NOT NULL,
     estado                VARCHAR(50)  NOT NULL DEFAULT 'Pendiente',
-    -- 'Pendiente' | 'Activa' | 'Completada' | 'Cancelada'
     fecha_programa        DATE,
     id_usuario            INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
     equipos_seleccionados INTEGER[]    DEFAULT '{}'
-    -- Array de IDs de equipos asignados a esta orden
 );
-```
-
-### Datos de prueba (seed.sql)
-
-```sql
--- Usuario administrador
-INSERT INTO usuarios (nombre, correo, contrasena, ocupacion)
-VALUES (
-    'Admin FieldOps',
-    'admin@fieldops.com',
-    '$2b$10$...hash_de_Admin123!...',  -- bcrypt hash
-    'Administrador'
-);
-
--- Usuario técnico
-INSERT INTO usuarios (nombre, correo, contrasena, ocupacion)
-VALUES (
-    'Carlos Ramírez',
-    'tecnico@fieldops.com',
-    '$2b$10$...hash_de_Tecnico123!...',
-    'Técnico'
-);
-
--- Equipos de ejemplo
-INSERT INTO equipos (nombre, marca, estado, condicion, fecha_mantto) VALUES
-    ('Multímetro Digital',  'Fluke',   'Disponible',    'Buena',   '2025-06-01'),
-    ('Taladro Percutor',    'Dewalt',  'Disponible',    'Buena',   '2025-07-15'),
-    ('Llave Torquimétrica', 'Stanley', 'Mantenimiento', 'Regular', '2025-05-20'),
-    ('Nivel Láser',         'Bosch',   'Disponible',    'Nuevo',   '2025-12-01');
-
--- Orden de trabajo de ejemplo
-INSERT INTO ordenes (titulo, estado, fecha_programa, id_usuario, equipos_seleccionados)
-VALUES (
-    'Revisión eléctrica planta norte',
-    'Activa',
-    '2025-08-10',
-    2,
-    '{1, 2}'
-);
-```
-
-### Diagrama Entidad-Relación
-
-```
-┌─────────────────┐       ┌─────────────────────┐
-│    USUARIOS      │       │       ORDENES        │
-├─────────────────┤       ├─────────────────────┤
-│ 🔑 id (PK)      │◄──────│ 🔑 id (PK)          │
-│    nombre       │  1:N  │    titulo           │
-│    correo       │       │    estado           │
-│    contrasena   │       │    fecha_programa   │
-│    ocupacion    │       │    id_usuario (FK)  │
-└─────────────────┘       │    equipos_selec[]  │
-                          └─────────────────────┘
-                                    │
-                          (array de IDs)
-                                    │
-                          ┌─────────▼───────────┐
-                          │       EQUIPOS        │
-                          ├─────────────────────┤
-                          │ 🔑 id (PK)          │
-                          │    nombre           │
-                          │    marca            │
-                          │    estado           │
-                          │    condicion        │
-                          │    fecha_mantto     │
-                          └─────────────────────┘
 ```
 
 ---
 
-## 🔧 Variables de entorno
+## 🔧 Variables de Entorno
 
-### Backend (`/backend/.env`)
-
+**`/backend/.env`**
 ```env
-# ── Servidor ──────────────────────────────────
 PORT=3000
 NODE_ENV=development
 
-# ── Base de datos ─────────────────────────────
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=fieldops_db
 DB_USER=postgres
-DB_PASSWORD=tu_contraseña_aqui
+DB_PASSWORD=tu_contraseña
 
-# ── Autenticación JWT ─────────────────────────
-JWT_SECRET=tu_clave_secreta_muy_larga_y_segura_aqui
+JWT_SECRET=clave_secreta_aleatoria_minimo_32_caracteres
 JWT_EXPIRES_IN=24h
 
-# ── CORS ──────────────────────────────────────
 CORS_ORIGIN=http://localhost:5173
 ```
 
-### Frontend (`/frontend/.env`)
-
+**`/frontend/.env`**
 ```env
-# URL base de la API
 VITE_API_URL=http://localhost:3000
 ```
 
-> ⚠️ **Nunca subas el archivo `.env` a Git.** Asegúrate de que `.env` esté en tu `.gitignore`.
-
 ---
 
-## 📁 Estructura del proyecto
+## 🛡️ Roles y Permisos
 
-```
-fieldops/
-│
-├── 📁 frontend/                  # Aplicación React (SPA)
-│   ├── 📁 src/
-│   │   ├── 📁 api/               # Capa de llamadas HTTP
-│   │   │   ├── Auth.js           # login()
-│   │   │   ├── Usuarios.js       # CRUD usuarios
-│   │   │   ├── Equipos.js        # CRUD equipos
-│   │   │   └── Ordenes.js        # CRUD órdenes
-│   │   │
-│   │   ├── 📁 components/        # Componentes reutilizables
-│   │   │   ├── ProtectedRoute.jsx    # Guardia de rutas
-│   │   │   ├── FieldOpsToast.jsx     # Sistema de notificaciones
-│   │   │   ├── CrearUsuarios.jsx     # Formulario CRUD usuario
-│   │   │   ├── CrearEquipos.jsx      # Formulario CRUD equipo
-│   │   │   └── CrearOrdenes.jsx      # Formulario CRUD orden
-│   │   │
-│   │   ├── 📁 Pages/             # Vistas / páginas completas
-│   │   │   ├── Login.jsx         # Pantalla de autenticación
-│   │   │   ├── Dashboard.jsx     # Panel de métricas
-│   │   │   ├── Usuarios.jsx      # Gestión de usuarios
-│   │   │   ├── Equipos.jsx       # Inventario
-│   │   │   ├── Ordenes.jsx       # Órdenes de trabajo
-│   │   │   └── Perfil.jsx        # Perfil de usuario
-│   │   │
-│   │   ├── App.jsx               # Router principal + ToastProvider
-│   │   ├── App.css               # Estilos globales
-│   │   └── main.jsx              # Entry point
-│   │
-│   ├── index.html
-│   ├── vite.config.js
-│   ├── tailwind.config.js
-│   └── package.json
-│
-├── 📁 backend/                   # API REST Node.js
-│   ├── 📁 routes/
-│   │   ├── auth.js               # POST /auth/login
-│   │   ├── usuarios.js           # CRUD /usuarios
-│   │   ├── equipos.js            # CRUD /equipos
-│   │   ├── ordenes.js            # CRUD /ordenes
-│   │   └── dashboard.js          # GET /dashboard/metricas
-│   │
-│   ├── 📁 middleware/
-│   │   ├── verifyToken.js        # Validación JWT
-│   │   └── checkRole.js          # Verificación de rol
-│   │
-│   ├── 📁 db/
-│   │   └── connection.js         # Pool de conexiones PostgreSQL
-│   │
-│   ├── server.js                 # Entry point Express
-│   ├── .env.example
-│   └── package.json
-│
-├── 📁 database/
-│   ├── schema.sql                # Definición de tablas
-│   └── seed.sql                  # Datos de prueba
-│
-└── README.md
-```
-
----
-
-## 🧩 Módulos del sistema
-
-### 🔐 Autenticación
-- Login con correo y contraseña
-- Contraseñas hasheadas con `bcrypt`
-- Token JWT firmado con expiración configurable
-- Rutas protegidas en el frontend con `ProtectedRoute`
-- Redirección automática al login si el token expira
-
-### 📊 Dashboard
-- Endpoint `GET /dashboard/metricas` agrega datos en tiempo real
-- Métricas: total de órdenes, completadas, pendientes, técnicos activos, equipos en mantenimiento
-- Tarjetas animadas con entrada escalonada
-
-### 👥 Usuarios
-- `GET /usuarios` — lista todos los usuarios
-- `POST /usuarios` — crea nuevo usuario (solo Admin)
-- `PUT /usuarios/:id` — edita usuario (solo Admin)
-- `DELETE /usuarios/:id` — elimina usuario (solo Admin)
-
-### 📦 Equipos
-- `GET /equipos` — lista inventario completo
-- `POST /equipos` — registra nuevo equipo (solo Admin)
-- `PUT /equipos/:id` — actualiza datos del equipo
-- `DELETE /equipos/:id` — elimina equipo (solo Admin)
-- Al asignarse a una orden, el estado cambia a `Asignado`
-
-### 📋 Órdenes
-- `GET /ordenes` — lista todas las órdenes
-- `POST /ordenes` — crea orden y asigna equipos (solo Admin)
-- `PUT /ordenes/:id` — actualiza estado y datos
-- `DELETE /ordenes/:id` — elimina orden (solo Admin)
-- Al crear, solo muestra equipos con estado `Disponible`
-
----
-
-## 🛡️ Roles y permisos
-
-| Acción | 👑 Administrador | 👷 Técnico |
+| Acción | 👑 Admin | 👷 Técnico |
 |---|:---:|:---:|
 | Ver Dashboard | ✅ | ✅ |
-| Ver usuarios | ✅ | ✅ |
-| Crear / Editar / Eliminar usuarios | ✅ | ❌ |
-| Ver inventario | ✅ | ✅ |
-| Crear / Editar / Eliminar equipos | ✅ | ❌ |
-| Ver órdenes | ✅ | ✅ |
-| Crear / Eliminar órdenes | ✅ | ❌ |
-| Editar estado de órdenes | ✅ | ✅ |
-| Ver perfil propio | ✅ | ✅ |
-
----
-
-## 🎨 Diseño y UI
-
-FieldOps utiliza un sistema de diseño oscuro cohesivo construido con TailwindCSS y animaciones CSS puras.
-
-### Paleta de colores
-
-```
-Fondo principal    →  gray-900  (#111827)
-Fondo de tarjetas  →  gray-800  (#1F2937)
-Fondo elevado      →  gray-950  (#030712)
-
-Acento primario    →  sky-500   (#0EA5E9)   — Dashboard, Login
-Acento secundario  →  indigo-500 (#6366F1)  — Órdenes, gradientes
-Éxito / Activo     →  emerald-500 (#10B981) — Nav activa, Equipos
-Advertencia        →  amber-500  (#F59E0B)  — Editar, warnings
-Peligro            →  rose-500   (#F43F5E)  — Eliminar, errores
-Información        →  sky-400    (#38BDF8)  — Métricas, info
-```
-
-### Sistema de notificaciones (FieldOpsToast)
-
-Reemplaza `react-toastify` con un sistema propio sin dependencias externas:
-
-```jsx
-import { useFieldOpsToast } from '../components/FieldOpsToast';
-
-const MiComponente = () => {
-  const toast = useFieldOpsToast();
-
-  // Tipos disponibles
-  toast.success('Operación exitosa', { title: '¡Listo!' });
-  toast.error('Algo salió mal', { title: 'Error' });
-  toast.warning('Acceso restringido', { title: 'Atención' });
-  toast.info('Sesión cerrada');
-
-  // Con duración personalizada (ms)
-  toast.success('Guardado', { duration: 6000 });
-};
-```
-
-### Convenciones de animación
-
-Las animaciones CSS están inyectadas dinámicamente por página para evitar conflictos:
-
-```css
-/* Entrada de página */
-.fo-page-in    { animation: fo-fade-up 0.4s ease both; }
-
-/* Entrada de tarjetas con delay escalonado */
-.fo-card:nth-child(1) { animation-delay: 0.05s; }
-.fo-card:nth-child(2) { animation-delay: 0.15s; }
-
-/* Entrada de filas de tabla */
-.fo-table-row  { animation: fo-row-in 0.3s ease both; }
-
-/* Entrada de modales */
-.fo-modal-in   { animation: fo-modal-in 0.3s cubic-bezier(0.34,1.4,0.64,1) both; }
-```
+| CRUD Usuarios | ✅ | ❌ |
+| Ver Inventario | ✅ | ✅ |
+| CRUD Equipos | ✅ | ❌ |
+| Ver Órdenes | ✅ | ✅ |
+| Crear / Eliminar Órdenes | ✅ | ❌ |
+| Actualizar estado de Órdenes | ✅ | ✅ |
+| Ver Perfil propio | ✅ | ✅ |
 
 ---
 
 ## 📡 API Reference
 
-Todas las rutas (excepto `/auth/login`) requieren el header:
-
+Todas las rutas (excepto `/auth/login`) requieren:
 ```
 Authorization: Bearer <JWT_TOKEN>
 ```
 
-### Auth
-
 ```http
-POST /auth/login
-Content-Type: application/json
+POST   /auth/login           → { token, nombre, ocupacion }
+GET    /dashboard/metricas   → { totalOrdenes, completadas, ... }
 
-{
-  "correo": "admin@fieldops.com",
-  "contrasena": "Admin123!"
-}
+GET    /usuarios
+POST   /usuarios             (Admin)
+PUT    /usuarios/:id         (Admin)
+DELETE /usuarios/:id         (Admin)
 
-→ 200 OK
-{
-  "token": "eyJhbGc...",
-  "nombre": "Admin FieldOps",
-  "ocupacion": "Administrador"
-}
-```
+GET    /equipos
+POST   /equipos              (Admin)
+PUT    /equipos/:id
+DELETE /equipos/:id          (Admin)
 
-### Dashboard
-
-```http
-GET /dashboard/metricas
-
-→ 200 OK
-{
-  "totalOrdenes": 12,
-  "ordenesCompletadas": 5,
-  "ordenesPendientes": 4,
-  "tecnicosActivos": 3,
-  "equiposMantenimiento": 2
-}
-```
-
-### Usuarios
-
-```http
-GET    /usuarios          → Lista todos los usuarios
-POST   /usuarios          → Crea usuario  (Admin)
-PUT    /usuarios/:id      → Actualiza usuario  (Admin)
-DELETE /usuarios/:id      → Elimina usuario  (Admin)
-```
-
-### Equipos
-
-```http
-GET    /equipos           → Lista inventario completo
-POST   /equipos           → Registra equipo  (Admin)
-PUT    /equipos/:id       → Actualiza equipo
-DELETE /equipos/:id       → Elimina equipo  (Admin)
-```
-
-### Órdenes
-
-```http
-GET    /ordenes           → Lista todas las órdenes
-POST   /ordenes           → Crea orden  (Admin)
-PUT    /ordenes/:id       → Actualiza orden
-DELETE /ordenes/:id       → Elimina orden  (Admin)
-```
-
----
-
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! Por favor sigue este flujo:
-
-```bash
-# 1. Haz un fork del repositorio
-# 2. Crea una rama para tu feature
-git checkout -b feature/nueva-funcionalidad
-
-# 3. Haz tus cambios y commitea
-git commit -m "feat: agrega nueva funcionalidad"
-
-# 4. Sube tu rama
-git push origin feature/nueva-funcionalidad
-
-# 5. Abre un Pull Request
-```
-
-### Convenciones de commits
-
-```
-feat:     nueva funcionalidad
-fix:      corrección de bug
-style:    cambios de estilos / UI
-refactor: refactorización sin cambios funcionales
-docs:     cambios en documentación
-chore:    tareas de mantenimiento
+GET    /ordenes
+POST   /ordenes              (Admin)
+PUT    /ordenes/:id
+DELETE /ordenes/:id          (Admin)
 ```
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia **MIT**. Ve el archivo [LICENSE](LICENSE) para más detalles.
+MIT © FieldOps Team
 
 ---
 
 <div align="center">
 
-Hecho con ⚡ por **Yerson Fabian Garzon Rodriguez**
+**¿Encontraste algo útil? Dale una ⭐ al repo.**
 
-![Visitors](https://img.shields.io/badge/Estado-En%20desarrollo-f59e0b?style=flat-square)
-![Made with Love](https://img.shields.io/badge/Hecho%20con-❤️-rose?style=flat-square)
+![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-f59e0b?style=flat-square&logo=github)
 
 </div>
